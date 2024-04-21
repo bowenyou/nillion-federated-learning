@@ -8,5 +8,6 @@ permissions/.nillion-config.json
 *.key
 .venv
 **/*.pt
+**/store_ids.json
 **/*.pth
 
