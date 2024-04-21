@@ -53,6 +53,7 @@ cd ..
 - `03_train_and_upload.py` - trains each local model and uploads the weights as well as gives compute permissions to `server`
   - this script takes in an epoch parameter corresponding to when in the training process things are
 - `04_compute_global_model.py` - aggregates the results of the local model privately by using the stored program. The output is then saved so that the local parties can update their version of the model.
+  - this script takes in an epoch parameter corresponding to when in the training process things are
 
 Now you can repeat steps 3 - 4 for many epochs.
 
