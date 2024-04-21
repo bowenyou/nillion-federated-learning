@@ -22,14 +22,3 @@ done
 echo "------------------------"
 echo "Compiled programs: all files in the programs directory were compiled to mir: [$TARGET_PATH]"
 
-echo "Now try running an example:"
-
-echo "----------single party compute --------------"
-
-echo "Code for single party compute lives in the client_single_party_compute folder"
-echo "📋 to run single party compute - addition_simple program: 'cd client_single_party_compute && python3 addition_simple.py'"
-
-echo "----------multi party compute --------------"
-
-echo "Code for single party compute lives in the client_multi_party_compute folder"
-echo "📋 to run multi party compute in 3 steps - addition_simple_multi_party_3: 'cd client_multi_party_compute && python3 01_store_secret_party1.py'"

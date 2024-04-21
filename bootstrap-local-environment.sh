@@ -96,7 +96,7 @@ log_file_contents() {
 }
 
 # Generate node keys and add to .env - ex: NILLION_NODEKEY_PATH_PARTY_1
-for ((i=1; i<=$num_node_keys; i++)); do
+for ((i=0; i<$num_node_keys; i++)); do
     nodekey_file=$(mktemp)
     "$NILLION_CLI" "$NILLION_CLI_COMMAND_NODE_KEYGEN" "$nodekey_file"
     NODEKEY_FILES+=("$nodekey_file")
@@ -104,14 +104,29 @@ for ((i=1; i<=$num_node_keys; i++)); do
     update_env "NILLION_NODEKEY_TEXT_PARTY_$i" "$(log_file_contents $nodekey_file)" $ENV_TO_UPDATE
 done
 
+# Generate server party 
+nodekey_file=$(mktemp)
+"$NILLION_CLI" "$NILLION_CLI_COMMAND_NODE_KEYGEN" "$nodekey_file"
+NODEKEY_FILES+=("$nodekey_file")
+update_env "NILLION_NODEKEY_PATH_SERVER" "$nodekey_file" $ENV_TO_UPDATE
+update_env "NILLION_NODEKEY_TEXT_SERVER" "$(log_file_contents $nodekey_file)" $ENV_TO_UPDATE
+
+
 # Generate user keys and add to .env - ex: NILLION_USERKEY_PATH_PARTY_1
-for ((i=1; i<=$num_user_keys; i++)); do
+for ((i=0; i<$num_user_keys; i++)); do
     userkey_file=$(mktemp)
     "$NILLION_CLI" "$NILLION_CLI_COMMAND_USER_KEYGEN" "$userkey_file"
     USERKEY_FILES+=("$userkey_file")
     update_env "NILLION_USERKEY_PATH_PARTY_$i" "$userkey_file" $ENV_TO_UPDATE
     update_env "NILLION_USERKEY_TEXT_PARTY_$i" "$(log_file_contents $userkey_file)" $ENV_TO_UPDATE
 done
+
+userkey_file=$(mktemp)
+"$NILLION_CLI" "$NILLION_CLI_COMMAND_USER_KEYGEN" "$userkey_file"
+USERKEY_FILES+=("$userkey_file")
+update_env "NILLION_USERKEY_PATH_SERVER" "$userkey_file" $ENV_TO_UPDATE
+update_env "NILLION_USERKEY_TEXT_SERVER" "$(log_file_contents $userkey_file)" $ENV_TO_UPDATE
+
 
 echo "🔑 Node key and user keys have been generated and added to .env"
 
