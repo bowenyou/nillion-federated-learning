@@ -7,3 +7,6 @@ permissions/.nillion-config.json
 .DS_Store
 *.key
 .venv
+**/*.pt
+**/*.pth
+
